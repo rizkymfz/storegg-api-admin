@@ -1,0 +1,43 @@
+<table id="example2" class="table table-bordered table-hover fs-sm text-center">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Banks</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let [i, val] of payment.entries()) { %>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><%= val.type %></td>
+            <td>
+                <% if(val.status === 'Y') { %> 
+                    <span class="badge badge-success">
+                        Active
+                    </span>
+                <% } else { %>
+                    <span class="badge badge-danger">
+                        Inactive
+                    </span>
+                <% } %>
+            </td>
+            <td>
+                <% val.banks.forEach(bank => { %> 
+                    <span class="badge badge-info">
+                        <%= bank.name %>  (<%= bank.bankName %>) - <%= bank.noRekening %>
+                    </span>
+                <% }) %>
+            </td>
+            <td>
+                <form action="/payment/delete/<%= val._id %>?_method=DELETE" method="POST">
+                    <a href="/payment/edit/<%= val._id %>" class="btn btn-sm btn-info"> <i class="fas fa-pencil-alt"></i> Edit</a>
+                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>

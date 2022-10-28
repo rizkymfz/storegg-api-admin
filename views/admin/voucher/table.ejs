@@ -1,0 +1,54 @@
+<table id="example2" class="table table-bordered table-hover fs-sm text-center">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Game</th>
+            <th>Category</th>
+            <th>Nominals</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let [i, val] of voucher.entries()) { %>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><%= val.name %></td>
+            <td><%= val?.category?.name ?? '-' %></td>
+            <td>
+                <% val.nominals.forEach(nominal => { %> 
+                    <span class="badge badge-info">
+                        <%= nominal.coinName %> - <%= nominal.coinQuantity %>
+                    </span>
+                <% }) %>
+            </td>
+            <td>
+                <% if(val.status === 'Y') { %> 
+                    <span class="badge badge-success">
+                        Active
+                    </span>
+                <% } else { %>
+                    <span class="badge badge-danger">
+                        Inactive
+                    </span>
+                <% } %>
+            </td>
+            <td>
+                <form action="/voucher/status/<%= val._id %>?_method=PUT" class="d-inline-block" method="POST">
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-folder"></i>
+                        <% if(val.status === 'Y') { %> 
+                            Disable
+                        <% } else { %>
+                            Enable
+                        <% } %>
+                    </button>
+                </form>
+                <form action="/voucher/delete/<%= val._id %>?_method=DELETE" class="d-inline-block" method="POST">
+                    <a href="/voucher/edit/<%= val._id %>" class="btn btn-sm btn-info"> <i class="fas fa-pencil-alt"></i> Edit</a>
+                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>
