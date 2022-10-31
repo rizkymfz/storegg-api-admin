@@ -3,7 +3,7 @@ var router = express.Router()
 const { 
     landingPage, 
     detailPage, 
-    payment, 
+    getPayment, 
     category, 
     checkout, 
     history, 
@@ -19,7 +19,7 @@ const os = require('os')
 router.get('/landingpage', landingPage)
 router.get('/:id/detail', detailPage)
 router.get('/category', category)
-router.get('/payment', payment)
+router.get('/payment', getPayment)
 router.get('/history', isLoginPlayer, history)
 router.get('/history/:id/detail', isLoginPlayer, historyDetail)
 router.post('/checkout', isLoginPlayer, checkout)
