@@ -28,7 +28,7 @@ module.exports = {
                 .populate('category')
                 .populate('nominals')
                 .populate('user', '_id name phoneNumber')
-            
+
             if(!voucher) {
                 res.status(200).json({ message: 'data not found.!' })
             }
@@ -37,6 +37,13 @@ module.exports = {
         } catch (err) {
             res.status(500).json({message:err.message || 'Server error'})
         }
+    },
+
+    getPayment: async (req, res) => {
+        const payment = await Payment.find()
+        .populate('banks')
+
+        res.status(200).json({ data:payment })
     },
 
     category: async(req, res)=> {
