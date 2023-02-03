@@ -19,8 +19,17 @@ const usersRouter = require('./app/users/router');
 const transactionRouter = require('./app/transaction/router');
 const playerRouter = require('./app/player/router');
 const authRouter = require('./app/auth/router');
+const http = require('http');
+const db = require('./db')
+const dotenv = require('dotenv')
+
+dotenv.config();
+db.on('error', (error)=> console.error(error));
+db.once('open', () => console.log('Database Connected'));
 
 var app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || '3000';
 var URL = `/api/v1`
 app.use(cors())
 
@@ -75,5 +84,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+server.listen(port, () => console.log(`Server Running at port: ${port}`));
 
 module.exports = app;

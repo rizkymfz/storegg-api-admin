@@ -2,6 +2,7 @@
   "name": "admin-storegg",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "env-cmd -f ./.env.local nodemon ./bin/www",
