@@ -172,7 +172,7 @@ module.exports = {
             res.status(500).json({message:err.message || 'Server error'})
         }
     },
-
+    
     dashboard: async (req, res) => {
         try {
             const count = await Transaction.aggregate([
