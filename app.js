@@ -12,7 +12,7 @@ import createError from 'http-errors';
 import session from 'express-session';
 import flash from 'connect-flash';
 
-//router
+//router controller
 import dashboardRouter from "./app/dashboard/router.js";
 import categoryRouter from'./app/category/router.js';
 import nominalRouter from './app/nominal/router.js';
