@@ -1,10 +1,10 @@
-var express = require('express');
+import express from 'express'
+import { index, login, logout } from './controller.js'
 var router = express.Router();
-const { index, login, logout } = require('./controller')
 /* GET home page. */
 
 router.get('/', index);
 router.post('/login', login);
 router.get('/logout', logout);
 
-module.exports = router;
+export default router;

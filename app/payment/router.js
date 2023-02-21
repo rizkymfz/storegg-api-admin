@@ -1,7 +1,7 @@
-var express = require('express');
+import express from 'express'
 var router = express.Router();
-const { index, create, store, edit, update, destroy } = require('./controller')
-const { isLoginAdmin } = require('../middleware/auth')
+import { index, create, store, edit, update, destroy } from './controller.js'
+import { isLoginAdmin } from '../middleware/auth.js'
 router.use(isLoginAdmin)
 
 /* GET home page. */
@@ -13,4 +13,4 @@ router.put('/update/:id', update);
 router.delete('/delete/:id', destroy);
 
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 let transactionSchema = mongoose.Schema({
     historyVoucherTopup : {
         gameName: { type: String, required: [true, 'field game name is required']},
@@ -74,4 +74,4 @@ let transactionSchema = mongoose.Schema({
     }],
 }, { timestamps: true })
 
-module.exports = mongoose.model('Transaction', transactionSchema)
+export default mongoose.model('Transaction', transactionSchema)

@@ -1,27 +1,32 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors')
- 
-const methodOverride = require('method-override')
-const session = require('express-session')
-const flash = require('connect-flash')
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+import db from './db/index.js'
+import methodOverride from 'method-override';
+import bodyParser from 'body-parser';
+import http from 'http';
+import path from "path";
+import logger from 'morgan';
+import createError from 'http-errors';
+import session from 'express-session';
+import flash from 'connect-flash';
 
-const dashboardRouter = require('./app/dashboard/router');
-const categoryRouter = require('./app/category/router');
-const nominalRouter = require('./app/nominal/router');
-const voucherRouter = require('./app/voucher/router');
-const bankRouter = require('./app/bank/router');
-const paymentRouter = require('./app/payment/router');
-const usersRouter = require('./app/users/router');
-const transactionRouter = require('./app/transaction/router');
-const playerRouter = require('./app/player/router');
-const authRouter = require('./app/auth/router');
-const http = require('http');
-const db = require('./db')
-const dotenv = require('dotenv')
+//router
+import dashboardRouter from "./app/dashboard/router.js";
+import categoryRouter from'./app/category/router.js';
+import nominalRouter from './app/nominal/router.js';
+import voucherRouter from './app/voucher/router.js';
+import bankRouter from './app/bank/router.js';
+import paymentRouter from './app/payment/router.js';
+import usersRouter from './app/users/router.js';
+import transactionRouter from './app/transaction/router.js';
+import playerRouter from './app/player/router.js';
+import authRouter from './app/auth/router.js';
+import { fileURLToPath } from 'url';
+//endrouter
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 db.on('error', (error)=> console.error(error));
@@ -87,4 +92,4 @@ app.use(function(err, req, res, next) {
 
 server.listen(port, () => console.log(`Server Running at port: ${port}`));
 
-module.exports = app;
+export default app;

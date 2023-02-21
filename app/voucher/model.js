@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 let voucherSchema = mongoose.Schema({
 
@@ -33,4 +33,4 @@ let voucherSchema = mongoose.Schema({
     // },
 }, { timestamps: true })
 
-module.exports = mongoose.model('Voucher', voucherSchema)
+export default mongoose.model('Voucher', voucherSchema)

@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
-const { index } = require('./controller')
-const { isLoginAdmin } = require('../middleware/auth')
+import express from 'express'
+import { index } from './controller.js'
+import { isLoginAdmin } from '../middleware/auth.js'
 
+var router = express.Router();
 /* GET home page. */
 router.use(isLoginAdmin)
 router.get('/', index);
 
-module.exports = router;
+export default router;

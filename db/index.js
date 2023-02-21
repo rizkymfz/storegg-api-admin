@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
-const { database } = require('../config')
+import mongoose from 'mongoose'
+import { config } from '../config/index.js'
 
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect(database);
+    await mongoose.connect(config.database);
 }
 const db = mongoose.connection
 
-module.exports = db
+export default db

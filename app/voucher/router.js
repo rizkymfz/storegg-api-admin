@@ -1,9 +1,10 @@
-var express = require('express');
+import express from 'express'
+import multer from 'multer'
+import os from 'os'
+import { index, create, store, edit, update, destroy, updateStatus } from './controller.js'
+import { isLoginAdmin } from '../middleware/auth.js'
+
 var router = express.Router();
-const multer = require('multer')
-const os = require('os')
-const { index, create, store, edit, update, destroy, updateStatus } = require('./controller')
-const { isLoginAdmin } = require('../middleware/auth')
 router.use(isLoginAdmin)
 
 /* GET home page. */
@@ -16,4 +17,4 @@ router.delete('/delete/:id', destroy);
 router.put('/status/:id', updateStatus);
 
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-var express = require('express')
+import express from 'express'
 var router = express.Router()
-const { 
+import { 
     landingPage, 
     detailPage, 
     getPayment, 
@@ -11,10 +11,10 @@ const {
     dashboard, 
     profile,
     updateProfile
-} = require('./controller')
-const { isLoginPlayer } = require('../middleware/auth')
-const multer = require('multer')
-const os = require('os')
+} from './controller.js'
+import { isLoginPlayer } from '../middleware/auth.js'
+import multer from 'multer'
+import os from 'os'
 
 router.get('/landingpage', landingPage)
 router.get('/:id/detail', detailPage)
@@ -27,4 +27,4 @@ router.get('/dashboard', isLoginPlayer, dashboard)
 router.get('/profile', isLoginPlayer, profile)
 router.put('/profile', isLoginPlayer, multer( {dest: os.tmpdir()} ).single('image'), updateProfile)
 
-module.exports = router
+export default router

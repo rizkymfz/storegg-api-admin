@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 let bankSchema = mongoose.Schema({
     name: {
         type: String,
@@ -14,4 +15,4 @@ let bankSchema = mongoose.Schema({
     },
 }, { timestamps: true })
 
-module.exports = mongoose.model('Bank', bankSchema)
+export default mongoose.model('Bank', bankSchema)

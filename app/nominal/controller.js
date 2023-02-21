@@ -1,118 +1,116 @@
-const Nominal = require('./model')
+import Nominal from './model.js'
 
-module.exports={
-    index: async (req, res) => {
-        try {
-            const alertMsg = req.flash("alertMsg")
-            const alertStatus = req.flash("alertStatus")
+export const index = async (req, res) => {
+    try {
+        const alertMsg = req.flash("alertMsg")
+        const alertStatus = req.flash("alertStatus")
 
-            const alert = { message: alertMsg, status: alertStatus }
-            const nominal = await Nominal.find()
-            res.render('admin/nominal/view_nominal', {
-                nominal,
-                alert
-            })
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('/category')
-            console.log(err)
-        }
-    },
+        const alert = { message: alertMsg, status: alertStatus }
+        const nominal = await Nominal.find()
+        res.render('admin/nominal/view_nominal', {
+            nominal,
+            alert
+        })
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('/category')
+        console.log(err)
+    }
+}
 
-    create: async (req, res) => {
-        try {
-            const alertMsg = req.flash("alertMsg")
-            const alertStatus = req.flash("alertStatus")
+export const create = async (req, res) => {
+    try {
+        const alertMsg = req.flash("alertMsg")
+        const alertStatus = req.flash("alertStatus")
 
-            const alert = { message: alertMsg, status: alertStatus }
+        const alert = { message: alertMsg, status: alertStatus }
 
-            res.render('admin/nominal/create', { alert })
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('/nominal')
-            console.log(err)
-        }
-    },
+        res.render('admin/nominal/create', { alert })
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('/nominal')
+        console.log(err)
+    }
+}
 
-    store: async (req, res) => {
-        try {
-            const { coinName, coinQuantity, price } = req.body
+export const store = async (req, res) => {
+    try {
+        const { coinName, coinQuantity, price } = req.body
 
-            const nominal = await Nominal({ coinName, coinQuantity, price })
-            await nominal.save()
+        const nominal = await Nominal({ coinName, coinQuantity, price })
+        await nominal.save()
 
-            req.flash('alertMsg', "Success add nominal")
-            req.flash('alertStatus', "success")
-            res.redirect('/nominal')
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('back')
-            console.log(err)
-        }
-    },
+        req.flash('alertMsg', "Success add nominal")
+        req.flash('alertStatus', "success")
+        res.redirect('/nominal')
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('back')
+        console.log(err)
+    }
+}
 
-    edit: async (req, res) => {
-        try {
-            const { id } = req.params
-            const alertMsg = req.flash("alertMsg")
-            const alertStatus = req.flash("alertStatus")
+export const edit = async (req, res) => {
+    try {
+        const { id } = req.params
+        const alertMsg = req.flash("alertMsg")
+        const alertStatus = req.flash("alertStatus")
 
-            const alert = { message: alertMsg, status: alertStatus }
+        const alert = { message: alertMsg, status: alertStatus }
 
-            let nominal = await Nominal.findOne({_id: id})
+        let nominal = await Nominal.findOne({_id: id})
 
-            res.render('admin/nominal/edit', {
-                nominal,
-                alert
-            })
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('/nominal')
-            console.log(err)
-        }
-    },
+        res.render('admin/nominal/edit', {
+            nominal,
+            alert
+        })
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('/nominal')
+        console.log(err)
+    }
+}
 
-    update: async (req, res) => {
-        try {
-            const { id } = req.params
-            const { coinName, coinQuantity, price } = req.body
+export const update = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { coinName, coinQuantity, price } = req.body
 
-            await Nominal.findOneAndUpdate({
-                _id: id
-            }, { coinName, coinQuantity, price })
+        await Nominal.findOneAndUpdate({
+            _id: id
+        }, { coinName, coinQuantity, price })
 
-            req.flash('alertMsg', "Success update nominal")
-            req.flash('alertStatus', "success")
-            res.redirect('/nominal')
+        req.flash('alertMsg', "Success update nominal")
+        req.flash('alertStatus', "success")
+        res.redirect('/nominal')
 
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('back')
-            console.log(err)
-        }
-    },
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('back')
+        console.log(err)
+    }
+}
 
-    destroy: async (req, res) => {
-        try {
-            const { id } = req.params
-            await Nominal.findOneAndRemove({
-                _id: id
-            })
-            
-            req.flash('alertMsg', "Success delete nominal")
-            req.flash('alertStatus', "success")
-            res.redirect('/nominal')
-            
-        } catch (err) {
-            req.flash('alertMsg', `${err.message}`)
-            req.flash('alertStatus', 'danger')
-            res.redirect('/nominal')
-            console.log(err)
-        }
-    },
+export const destroy = async (req, res) => {
+    try {
+        const { id } = req.params
+        await Nominal.findOneAndRemove({
+            _id: id
+        })
+        
+        req.flash('alertMsg', "Success delete nominal")
+        req.flash('alertStatus', "success")
+        res.redirect('/nominal')
+        
+    } catch (err) {
+        req.flash('alertMsg', `${err.message}`)
+        req.flash('alertStatus', 'danger')
+        res.redirect('/nominal')
+        console.log(err)
+    }
 }

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 let nominalSchema = mongoose.Schema({
     coinQuantity: {
         type: Number,
@@ -14,4 +15,4 @@ let nominalSchema = mongoose.Schema({
     },
 }, { timestamps: true })
 
-module.exports = mongoose.model('Nominal', nominalSchema)
+export default mongoose.model('Nominal', nominalSchema)

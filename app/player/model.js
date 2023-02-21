@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
 
 const HASH_ROUND = 10
 
@@ -66,4 +66,4 @@ playerSchema.pre('save', function(next) {
     next()
 })
 
-module.exports = mongoose.model('Player', playerSchema)
+export default mongoose.model('Player', playerSchema)
