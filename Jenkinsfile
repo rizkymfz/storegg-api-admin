@@ -9,7 +9,7 @@ pipeline{
       steps{
            discordSend description: "Jenkins Pipeline Started #${env.BUILD_NUMBER}", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD_WEBHOOK"
            sshagent(credentials:['ssh_server_node']){
-              sh "ssh  -o StrictHostKeyChecking=no  root@$IP_ANDY 'cd mobile-app && git pull' "
+              sh "ssh  -o StrictHostKeyChecking=no  root@$IP_ANDY 'cd /home/storegg-api-admin && git pull' "
            }
       }
     }
