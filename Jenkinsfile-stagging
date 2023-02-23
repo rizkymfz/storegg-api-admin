@@ -1,0 +1,26 @@
+pipeline{
+  agent any
+  environment{
+    IP_ANDY = credentials("url_ip_server_andy")
+    DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1078199626143899650/o_u8nOVmwbJlNVPlJYrnjT3jCCuOT-Pm6Hlm_Jcn1tjxjf5WzfemzoomTiqE8Uji_P_d"
+  }
+  stages{
+    stage("Connect To Server"){
+      steps{
+           discordSend description: "Jenkins Pipeline Started #${env.BUILD_NUMBER}", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD_WEBHOOK"
+           sshagent(credentials:['ssh_server_node']){
+              sh "ssh  -o StrictHostKeyChecking=no  root@$IP_ANDY 'cd /home/store-api-stagging && git pull' "
+           }
+      }
+    }
+  }
+  post{
+     success{
+       discordSend description: "Jenkins Pipeline Success #${env.BUILD_NUMBER}", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD_WEBHOOK"
+     }
+
+     failure{
+       discordSend description: 'Jenkins Pipeline Failed  #${env.BUILD_NUMBER}', footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD_WEBHOOK"
+     }
+  }
+}
